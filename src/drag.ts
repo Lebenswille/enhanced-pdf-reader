@@ -37,7 +37,7 @@ export const registerOutlineDrag = async (
 				app.dragManager.handleDrag(item.selfEl, (evt) => {
 					app.dragManager.updateSource([item.selfEl], "is-being-dragged");
 					return {
-						source: "pdf-reader",
+						source: "enhanced-pdf-reader",
 						type: "pdf-offset",
 						icon: "lucide-heading",
 						title,
@@ -53,7 +53,7 @@ export const registerOutlineDrag = async (
 
 						if (
 							!draggable ||
-							draggable.source !== "pdf-reader" ||
+							draggable.source !== "enhanced-pdf-reader" ||
 							draggable.type !== "pdf-offset"
 						)
 							return;
@@ -110,7 +110,7 @@ export const registerOutlineDrag = async (
 		(evt, draggable, dragging) => {
 			if (!lib.isEditable(child)) return;
 
-			if (!draggable || draggable.source !== "pdf-reader" || draggable.type !== "pdf-offset")
+			if (!draggable || draggable.source !== "enhanced-pdf-reader" || draggable.type !== "pdf-offset")
 				return;
 
 			if (evt.target !== evt.currentTarget) return;
@@ -167,7 +167,7 @@ export const registerThumbnailDrag = (plugin: PDFReader, child: PDFViewerChild, 
 			app.dragManager.handleDrag(div, (evt) => {
 				app.dragManager.updateSource([div], "is-being-dragged");
 				return {
-					source: "pdf-reader",
+					source: "enhanced-pdf-reader",
 					type: "pdf-page",
 					icon: "lucide-book-open",
 					title,
@@ -209,7 +209,7 @@ export const registerAnnotationPopupDrag = (
 			const template = plugin.settings.copyCommands[palette.actionIndex].template;
 
 			return {
-				source: "pdf-reader",
+				source: "enhanced-pdf-reader",
 				type: "pdf-annotation",
 				icon: "lucide-highlighter",
 				title: "PDF annotation",

@@ -69,7 +69,7 @@ export default class PDFReader extends Plugin {
 	autoFocusToggleIconEl: HTMLElement | null = null;
 	/** A ribbon icon to toggle auto-paste mode */
 	autoPasteToggleIconEl: HTMLElement | null = null;
-	/** PDF Reader relies on monkey-patching several aspects of Obsidian's internals. This property keeps track of the patching status (succeeded or not). */
+	/** Enhanced PDF Reader relies on monkey-patching several aspects of Obsidian's internals. This property keeps track of the patching status (succeeded or not). */
 	patchStatus = {
 		workspace: false,
 		pagePreview: false,
@@ -86,7 +86,7 @@ export default class PDFReader extends Plugin {
 	 * However, `PDFViewerComponent` does not have the information of the subpath to be opened at the moment, so we need to store it here
 	 * so that we can pass it to `loadFile` when the patch is successful.
 	 *
-	 * Without this, when the user opens a link to PDF selection or annotation, it will not be highlighted (Obsidian-native highlight, not PDF Reader highlight)
+	 * Without this, when the user opens a link to PDF selection or annotation, it will not be highlighted (Obsidian-native highlight, not Enhanced PDF Reader highlight)
 	 * properly if it is the first time the user opens a PDF link.
 	 */
 	subpathWhenPatched?: string;
@@ -113,7 +113,7 @@ export default class PDFReader extends Plugin {
 	citationIdRegex: RegExp;
 	/** Maps a `div.pdf-container` element to the corresponding `PDFViewerChild` object. */
 	// In most use cases of this map, the goal is also achieved by using lib.workspace.iteratePDFViewerChild.
-	// However, **before PDF Reader 0.40.18**, a PDF embed inside a Canvas text node cannot be handled by the function, so we needed this map.
+	// However, **before Enhanced PDF Reader 0.40.18**, a PDF embed inside a Canvas text node cannot be handled by the function, so we needed this map.
 	// As of 0.40.18, the function can handle it, but I will keep this map as it could be advantageous
 	// in terms of performance (it can avoid iteration over all PDFViewerChild objects).
 	// Also, there is a saying "if it ain't broke, don't fix it."
@@ -159,7 +159,7 @@ export default class PDFReader extends Plugin {
 
 		this.startTrackingActiveMarkdownFile();
 
-		this.registerObsidianProtocolHandler("pdf-reader", this.obsidianProtocolHandler.bind(this));
+		this.registerObsidianProtocolHandler("enhanced-pdf-reader", this.obsidianProtocolHandler.bind(this));
 
 		this.addSettingTab((this.settingTab = new PDFReaderSettingTab(this)));
 
@@ -182,7 +182,7 @@ export default class PDFReader extends Plugin {
 		await this.cleanUpAnystyleFiles();
 	}
 
-	/** Clean up the AnyStyle input files and their directory (.obsidian/plugins/pdf-reader/anystyle) */
+	/** Clean up the AnyStyle input files and their directory (.obsidian/plugins/enhanced-pdf-reader/anystyle) */
 	async cleanUpAnystyleFiles() {
 		const adapter = this.app.vault.adapter;
 		if (Platform.isDesktopApp && adapter instanceof FileSystemAdapter) {
@@ -315,7 +315,7 @@ export default class PDFReader extends Plugin {
 
 		this.renameSetting("selectToCopyToggleRibbonIcon", "autoCopyToggleRibbonIcon");
 		this.renameCommand(
-			"pdf-reader:toggle-select-to-copy",
+			"enhanced-pdf-reader:toggle-select-to-copy",
 			`${this.manifest.id}:toggle-auto-copy`,
 		);
 
@@ -363,7 +363,7 @@ export default class PDFReader extends Plugin {
 	}
 
 	checkDeprecatedSettings() {
-		if (document.querySelectorAll(".pdf-reader-deprecated-setting-notice").length > 0) {
+		if (document.querySelectorAll(".enhanced-pdf-reader-deprecated-setting-notice").length > 0) {
 			return;
 		}
 
@@ -374,13 +374,13 @@ export default class PDFReader extends Plugin {
 			const notice = new Notice("", 0).setMessage(
 				createFragment((el) => {
 					const linkEl = createEl("a", {
-						href: "obsidian://pdf-reader?setting=" + settingId,
+						href: "obsidian://enhanced-pdf-reader?setting=" + settingId,
 					});
-					el.append("PDF Reader: ");
+					el.append("Enhanced PDF Reader: ");
 					setMessage(el, linkEl);
 				}),
 			);
-			notice.containerEl.addClass("pdf-reader-deprecated-setting-notice");
+			notice.containerEl.addClass("enhanced-pdf-reader-deprecated-setting-notice");
 			notice.messageEl.setCssStyles({
 				color: "var(--text-warning)",
 			});
@@ -475,7 +475,7 @@ export default class PDFReader extends Plugin {
 			const notice = new Notice(
 				createFragment((el) =>
 					el.append(
-						`PDF Reader: Please consider moving the "${this.settings.proxyMDProperty}" Dataview inline fields to the properties (YAML frontmatter).`,
+						`Enhanced PDF Reader: Please consider moving the "${this.settings.proxyMDProperty}" Dataview inline fields to the properties (YAML frontmatter).`,
 						createEl("br"),
 						"Click ",
 						createEl(
@@ -494,7 +494,7 @@ export default class PDFReader extends Plugin {
 				),
 				0,
 			);
-			notice.containerEl.addClass("pdf-reader-deprecated-setting-notice");
+			notice.containerEl.addClass("enhanced-pdf-reader-deprecated-setting-notice");
 			notice.messageEl.setCssStyles({
 				color: "var(--text-warning)",
 			});
@@ -883,7 +883,7 @@ export default class PDFReader extends Plugin {
 		);
 
 		this.registerEvent(
-			this.on("pdf-reader:annotation-modified", async ({ file, page, id }) => {
+			this.on("enhanced-pdf-reader:annotation-modified", async ({ file, page, id }) => {
 				const annot = await this.lib.highlight.writeFile.getAnnotation(file, page, id);
 				if (!annot) return;
 
@@ -951,10 +951,10 @@ export default class PDFReader extends Plugin {
 				new Notice(
 					createFragment((el) => {
 						el.append(
-							"PDF Reader: There is a newer version available! ",
+							"Enhanced PDF Reader: There is a newer version available! ",
 							createEl("a", {
 								text: "Update now",
-								href: "obsidian://show-plugin?id=pdf-reader",
+								href: "obsidian://show-plugin?id=enhanced-pdf-reader",
 							}),
 						);
 					}),
@@ -971,34 +971,34 @@ export default class PDFReader extends Plugin {
 	}
 
 	private registerHoverLinkSources() {
-		this.registerHoverLinkSource("pdf-reader", {
+		this.registerHoverLinkSource("enhanced-pdf-reader", {
 			defaultMod: true,
-			display: "PDF Reader: backlink highlights",
+			display: "Enhanced PDF Reader: backlink highlights",
 		});
 
 		this.registerHoverLinkSource(PDFInternalLinkPostProcessor.HOVER_LINK_SOURCE_ID, {
 			defaultMod: true,
-			display: "PDF Reader: internal links in PDF (except for citations)",
+			display: "Enhanced PDF Reader: internal links in PDF (except for citations)",
 		});
 
 		this.registerHoverLinkSource(BibliographyManager.HOVER_LINK_SOURCE_ID, {
 			defaultMod: false,
-			display: "PDF Reader: citation links in PDF",
+			display: "Enhanced PDF Reader: citation links in PDF",
 		});
 
 		this.registerHoverLinkSource(PDFExternalLinkPostProcessor.HOVER_LINK_SOURCE_ID, {
 			defaultMod: true,
-			display: "PDF Reader: external links in PDF",
+			display: "Enhanced PDF Reader: external links in PDF",
 		});
 
 		this.registerHoverLinkSource(PDFOutlineItemPostProcessor.HOVER_LINK_SOURCE_ID, {
 			defaultMod: true,
-			display: "PDF Reader: outlines (bookmarks)",
+			display: "Enhanced PDF Reader: outlines (bookmarks)",
 		});
 
 		this.registerHoverLinkSource(PDFThumbnailItemPostProcessor.HOVER_LINK_SOURCE_ID, {
 			defaultMod: true,
-			display: "PDF Reader: thumbnails",
+			display: "Enhanced PDF Reader: thumbnails",
 		});
 	}
 
@@ -1068,7 +1068,7 @@ export default class PDFReader extends Plugin {
 		evt: "highlight",
 		callback: (data: {
 			type: "selection" | "annotation";
-			source: "obsidian" | "pdf-reader";
+			source: "obsidian" | "enhanced-pdf-reader";
 			pageNumber: number;
 			child: PDFViewerChild;
 		}) => any,
@@ -1086,12 +1086,12 @@ export default class PDFReader extends Plugin {
 		context?: any,
 	): EventRef;
 	on(
-		evt: "pdf-reader:annotation-modified",
+		evt: "enhanced-pdf-reader:annotation-modified",
 		callback: (data: { file: TFile; page: number; id: string }) => any,
 		context?: any,
 	): EventRef;
 	on(
-		evt: "pdf-reader:annotation-deleted",
+		evt: "enhanced-pdf-reader:annotation-deleted",
 		callback: (data: { file: TFile; page: number; id: string }) => any,
 		context?: any,
 	): EventRef;
@@ -1112,7 +1112,7 @@ export default class PDFReader extends Plugin {
 		evt: "highlight",
 		data: {
 			type: "selection" | "annotation";
-			source: "obsidian" | "pdf-reader";
+			source: "obsidian" | "enhanced-pdf-reader";
 			pageNumber: number;
 			child: PDFViewerChild;
 		},
@@ -1121,11 +1121,11 @@ export default class PDFReader extends Plugin {
 	trigger(evt: "update-dom"): void;
 	trigger(evt: "adapt-to-theme-change", data: { adapt: boolean }): void;
 	trigger(
-		evt: "pdf-reader:annotation-modified",
+		evt: "enhanced-pdf-reader:annotation-modified",
 		data: { file: TFile; page: number; id: string },
 	): void;
 	trigger(
-		evt: "pdf-reader:annotation-deleted",
+		evt: "enhanced-pdf-reader:annotation-deleted",
 		data: { file: TFile; page: number; id: string },
 	): void;
 
@@ -1133,7 +1133,7 @@ export default class PDFReader extends Plugin {
 		this.events.trigger(evt, ...args);
 	}
 
-	requireModKeyForLinkHover(id = "pdf-reader") {
+	requireModKeyForLinkHover(id = "enhanced-pdf-reader") {
 		return (
 			(this.app.internalPlugins.plugins["page-preview"].instance as any).overrides[id] ??
 			this.app.workspace.hoverLinkSources[id]?.defaultMod ??

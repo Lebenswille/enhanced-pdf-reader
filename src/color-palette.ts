@@ -17,7 +17,7 @@ export type ColorPaletteState = Pick<
 >;
 
 export class ColorPalette extends PDFReaderComponent {
-	static readonly CLS = "pdf-reader-color-palette";
+	static readonly CLS = "enhanced-pdf-reader-color-palette";
 	/** Maps a paletteEl to the corresponding ColorPalette instance */
 	static elInstanceMap = new Map<HTMLElement, ColorPalette>();
 
@@ -107,9 +107,9 @@ export class ColorPalette extends PDFReaderComponent {
 		}
 
 		this.statusContainerEl = this.paletteEl.createDiv(
-			"pdf-reader-color-palette-status-container",
+			"enhanced-pdf-reader-color-palette-status-container",
 		);
-		this.statusEl = this.statusContainerEl.createSpan("pdf-reader-color-palette-status");
+		this.statusEl = this.statusContainerEl.createSpan("enhanced-pdf-reader-color-palette-status");
 
 		this.registerEvent(
 			this.plugin.on("color-palette-state-change", ({ source }) => {
@@ -340,7 +340,7 @@ export class ColorPalette extends PDFReaderComponent {
 				});
 			},
 		);
-		buttonEl.addClass("pdf-reader-action-menu");
+		buttonEl.addClass("enhanced-pdf-reader-action-menu");
 		return buttonEl;
 	}
 
@@ -369,7 +369,7 @@ export class ColorPalette extends PDFReaderComponent {
 				});
 			},
 		);
-		buttonEl.addClass("pdf-reader-display-text-format-menu");
+		buttonEl.addClass("enhanced-pdf-reader-display-text-format-menu");
 		return buttonEl;
 	}
 
@@ -519,7 +519,7 @@ export class ColorPalette extends PDFReaderComponent {
 	}
 
 	addCropButton(paletteEl: HTMLElement) {
-		this.cropButtonEl = paletteEl.createDiv("clickable-icon pdf-reader-rect-select", (el) => {
+		this.cropButtonEl = paletteEl.createDiv("clickable-icon enhanced-pdf-reader-rect-select", (el) => {
 			setIcon(el, "lucide-box-select");
 			setTooltip(el, "Copy embed link to rectangular selection");
 
@@ -576,7 +576,7 @@ export class ColorPalette extends PDFReaderComponent {
 			selectBox.top = y;
 
 			// Display the selection box
-			const boxEl = pageEl.createDiv("pdf-reader-select-box");
+			const boxEl = pageEl.createDiv("enhanced-pdf-reader-select-box");
 			const pageRect = pageEl.getBoundingClientRect(); // includes border width & padding
 			const style = getComputedStyle(pageEl);
 			const borderTop = parseFloat(style.borderTopWidth);
@@ -664,8 +664,8 @@ export class ColorPalette extends PDFReaderComponent {
 
 		const toggle = () => {
 			cropButtonEl.toggleClass("is-active", !cropButtonEl.hasClass("is-active"));
-			viewerEl.toggleClass("pdf-reader-selecting", cropButtonEl.hasClass("is-active"));
-			this.register(() => viewerEl.removeClass("pdf-reader-selecting"));
+			viewerEl.toggleClass("enhanced-pdf-reader-selecting", cropButtonEl.hasClass("is-active"));
+			this.register(() => viewerEl.removeClass("enhanced-pdf-reader-selecting"));
 
 			activeWindow.getSelection()?.empty();
 

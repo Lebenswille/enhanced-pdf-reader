@@ -948,7 +948,7 @@ export class copyLinkLib extends PDFReaderLibSubmodule {
 			if (this.settings.autoSync) {
 				const content = await this.app.vault.read(file);
 				if (content.includes(text.trim())) {
-					console.log("PDF Reader: Content already exists in note, skipping auto-sync");
+					console.log("Enhanced PDF Reader: Content already exists in note, skipping auto-sync");
 					return true;
 				}
 			}

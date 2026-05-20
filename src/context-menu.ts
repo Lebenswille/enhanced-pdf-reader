@@ -548,7 +548,7 @@ export class PDFReaderContextMenu extends PDFReaderMenu {
 														);
 													},
 												);
-												plugin.trigger("pdf-reader:annotation-modified", {
+												plugin.trigger("enhanced-pdf-reader:annotation-modified", {
 													file: child.file,
 													page: pageNumber,
 													id,
@@ -908,9 +908,9 @@ export class PDFReaderProductMenuComponent extends PDFReaderComponent {
 				this.itemToColorName.set(item, i >= 0 ? colorNames[i] : null);
 
 				const hex = i >= 0 ? this.settings.colors[colorNames[i]] : "transparent";
-				item.dom.addClass("pdf-reader-color-menu-item");
+				item.dom.addClass("enhanced-pdf-reader-color-menu-item");
 				item.titleEl.before(
-					createDiv("pdf-reader-color-indicator", (el) => {
+					createDiv("enhanced-pdf-reader-color-indicator", (el) => {
 						el.setCssStyles({ backgroundColor: hex });
 					}),
 				);

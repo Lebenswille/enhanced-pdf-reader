@@ -15,7 +15,7 @@ export type ExCommand = {
 
 export const exCommands = (vim: VimBindings): ExCommand[] => {
 	/***************************************************************
-	 * The full list of the default Ex commands supported by PDF Reader *
+	 * The full list of the default Ex commands supported by Enhanced PDF Reader *
 	 ***************************************************************/
 	return [
 		{ id: "nextpage", func: () => vim.pdfViewer?.nextPage() },
@@ -230,7 +230,7 @@ export const exCommands = (vim: VimBindings): ExCommand[] => {
 			description: `
             :hint [<target1> <target2> ...] - Enter hint mode and show hint marks for the specified targets in the current page. Inspired by [Tridactyl](https://github.com/tridactyl/tridactyl)'s hint mode.
             
-            If no target is specified, the default targets (configured in PDF Reader settings) will be used.
+            If no target is specified, the default targets (configured in Enhanced PDF Reader settings) will be used.
             The accepted targets are: 
             
             - \`all\`: all of the followings

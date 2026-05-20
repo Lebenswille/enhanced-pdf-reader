@@ -1,6 +1,6 @@
 {
-  "id": "pdf-reader",
-  "name": "PDF Reader",
+  "id": "enhanced-pdf-reader",
+  "name": "Enhanced PDF Reader",
   "version": "1.0.6",
   "minAppVersion": "1.5.8",
   "author": "Lebenswille",

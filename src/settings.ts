@@ -105,14 +105,14 @@ export const DEFAULT_BACKLINK_HOVER_COLOR = "green";
 
 const ACTION_ON_CITATION_HOVER = {
 	none: "Same as other internal links",
-	"pdf-reader-bib-popover": "PDF Reader's custom bibliography popover",
+	"enhanced-pdf-reader-bib-popover": "Enhanced PDF Reader's custom bibliography popover",
 	"google-scholar-popover": "Google Scholar popover",
 } as const;
 
 const MOBILE_COPY_ACTIONS = {
 	text: "Copy text",
 	obsidian: "Obsidian default (copy as quote)",
-	"pdf-reader": "Run PDF Reader's copy command",
+	"enhanced-pdf-reader": "Run Enhanced PDF Reader's copy command",
 } as const;
 
 export interface PDFReaderSettings {
@@ -484,7 +484,7 @@ export const DEFAULT_SETTINGS: PDFReaderSettings = {
 	writeFileProductMenuConfig: ["color", "copy-format", "display"],
 	annotationProductMenuConfig: ["copy-format", "display"],
 	updateColorPaletteStateFromContextMenu: true,
-	mobileCopyAction: "pdf-reader",
+	mobileCopyAction: "enhanced-pdf-reader",
 	showContextMenuOnTablet: false,
 	executeBuiltinCommandForOutline: true,
 	executeBuiltinCommandForZoom: true,
@@ -582,7 +582,7 @@ export const DEFAULT_SETTINGS: PDFReaderSettings = {
 	hoverableDropdownMenuInToolbar: true,
 	zoomLevelInputBoxInToolbar: true,
 	popoverPreviewOnExternalLinkHover: true,
-	actionOnCitationHover: "pdf-reader-bib-popover",
+	actionOnCitationHover: "enhanced-pdf-reader-bib-popover",
 	anystylePath: "",
 	enableBibInEmbed: false,
 	enableBibInHoverPopover: false,
@@ -639,7 +639,7 @@ export class PDFReaderSettingTab extends PluginSettingTab {
 		this.headings = new Map();
 		this.promises = [];
 
-		this.containerEl.addClass("pdf-reader-settings");
+		this.containerEl.addClass("enhanced-pdf-reader-settings");
 		this.contentEl = this.containerEl.createDiv("content");
 	}
 
@@ -672,7 +672,7 @@ export class PDFReaderSettingTab extends PluginSettingTab {
 							.setIcon("lucide-link")
 							.onClick(() => {
 								navigator.clipboard.writeText(
-									`obsidian://pdf-reader?setting=${settingName}`,
+									`obsidian://enhanced-pdf-reader?setting=${settingName}`,
 								);
 							});
 					})
@@ -694,7 +694,7 @@ export class PDFReaderSettingTab extends PluginSettingTab {
 						.setIcon("lucide-link")
 						.onClick(() => {
 							navigator.clipboard.writeText(
-								`obsidian://pdf-reader?setting=heading:${id}`,
+								`obsidian://enhanced-pdf-reader?setting=heading:${id}`,
 							);
 						});
 				})

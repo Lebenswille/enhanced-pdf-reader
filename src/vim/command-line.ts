@@ -19,12 +19,12 @@ export class VimCommandLineMode extends VimBindingsMode {
 	constructor(vim: VimBindings) {
 		super(vim);
 
-		this.dom = this.vim.viewer.containerEl.createDiv("pdf-reader-vim-command", (el) => {
+		this.dom = this.vim.viewer.containerEl.createDiv("enhanced-pdf-reader-vim-command", (el) => {
 			this.register(() => el.remove());
 			el.appendText(":");
 			this.inputEl = el.createEl(
 				"input",
-				{ cls: "pdf-reader-vim-command-input" },
+				{ cls: "enhanced-pdf-reader-vim-command-input" },
 				(inputEl) => {
 					inputEl.placeholder = "type a command or page number...";
 

@@ -103,7 +103,7 @@ export class PDFAnnotationEditModal extends PDFAnnotationModal {
 		this.oldValues = {};
 		this.newValues = {};
 
-		this.containerEl.addClass("pdf-reader-annotation-edit-modal");
+		this.containerEl.addClass("enhanced-pdf-reader-annotation-edit-modal");
 		this.buttonContainerEl = this.modalEl.createDiv();
 
 		this.scope.register(["Mod"], "Enter", () => {
@@ -213,7 +213,7 @@ export class PDFAnnotationEditModal extends PDFAnnotationModal {
 					writers.forEach((writer) => writer(annot));
 				},
 			);
-			this.plugin.trigger("pdf-reader:annotation-modified", {
+			this.plugin.trigger("enhanced-pdf-reader:annotation-modified", {
 				file: this.file,
 				page: this.page,
 				id: this.id,
@@ -386,7 +386,7 @@ export class PDFAnnotationEditModal extends PDFAnnotationModal {
 			})
 			.setClass("no-border");
 		this.buttonContainerEl.createDiv({
-			cls: "pdf-reader-annotation-edit-modal-save-instructions",
+			cls: "enhanced-pdf-reader-annotation-edit-modal-save-instructions",
 			text: `Press ${getModifierNameInPlatform("Mod")} + Enter to save.`,
 		});
 	}
@@ -507,7 +507,7 @@ export class PDFAnnotationDeleteModal extends PDFAnnotationModal {
 
 	async deleteAnnotation() {
 		await this.lib.highlight.writeFile.deleteAnnotation(this.file, this.page, this.id);
-		this.plugin.trigger("pdf-reader:annotation-deleted", {
+		this.plugin.trigger("enhanced-pdf-reader:annotation-deleted", {
 			file: this.file,
 			page: this.page,
 			id: this.id,

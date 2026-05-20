@@ -230,7 +230,7 @@ export class PDFReaderToolbar extends PDFReaderComponent {
 										);
 										child.onCSSChange();
 										// I also considered replacing the above line with this.app.workspace.trigger('css-change'),
-										// but I decided to use PDF Reader's custom event to avoid potential conflicts with core features.
+										// but I decided to use Enhanced PDF Reader's custom event to avoid potential conflicts with core features.
 										this.plugin.trigger("adapt-to-theme-change", {
 											adapt: !isThemed,
 										});

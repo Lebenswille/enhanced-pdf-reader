@@ -11,7 +11,7 @@ export class DomManager extends PDFReaderComponent {
 
 	constructor(plugin: PDFReader) {
 		super(plugin);
-		this.styleEl = plugin.registerEl(createEl("style", { attr: { id: "pdf-reader-style" } }));
+		this.styleEl = plugin.registerEl(createEl("style", { attr: { id: "enhanced-pdf-reader-style" } }));
 		document.head.append(this.styleEl);
 	}
 
@@ -33,15 +33,15 @@ export class DomManager extends PDFReaderComponent {
 		this.updateStyleEl();
 
 		this.updateClass(
-			"pdf-reader-click-embed-to-open-link",
+			"enhanced-pdf-reader-click-embed-to-open-link",
 			this.settings.dblclickEmbedToOpenLink,
 		);
 		this.updateClass(
-			"pdf-reader-backlink-selection-highlight",
+			"enhanced-pdf-reader-backlink-selection-highlight",
 			this.settings.selectionBacklinkVisualizeStyle === "highlight",
 		);
 		this.updateClass(
-			"pdf-reader-backlink-selection-underline",
+			"enhanced-pdf-reader-backlink-selection-underline",
 			this.settings.selectionBacklinkVisualizeStyle === "underline",
 		);
 
@@ -60,11 +60,11 @@ export class DomManager extends PDFReaderComponent {
 			.map(([name, color]) => {
 				return isHexString(color)
 					? [
-							`.pdf-reader-backlink-highlight-layer .pdf-reader-backlink:not(.hovered-highlight)[data-highlight-color="${name.toLowerCase()}"],`,
+							`.enhanced-pdf-reader-backlink-highlight-layer .enhanced-pdf-reader-backlink:not(.hovered-highlight)[data-highlight-color="${name.toLowerCase()}"],`,
 							`.pdf-embed[data-highlight-color="${name.toLowerCase()}"] .textLayer .mod-focused {`,
-							`    --pdf-reader-color: ${color};`,
-							`    --pdf-reader-backlink-icon-color: ${color};`,
-							`    --pdf-reader-rect-color: ${color};`,
+							`    --enhanced-pdf-reader-color: ${color};`,
+							`    --enhanced-pdf-reader-backlink-icon-color: ${color};`,
+							`    --enhanced-pdf-reader-rect-color: ${color};`,
 							`}`,
 						].join("\n")
 					: "";
@@ -76,10 +76,10 @@ export class DomManager extends PDFReaderComponent {
 			defaultColor = "rgb(var(--text-highlight-bg-rgb))";
 		}
 		this.styleEl.textContent += [
-			`\n.pdf-reader-backlink-highlight-layer .pdf-reader-backlink:not(.hovered-highlight) {`,
-			`    --pdf-reader-color: ${defaultColor};`,
-			`    --pdf-reader-backlink-icon-color: ${defaultColor};`,
-			`    --pdf-reader-rect-color: ${defaultColor};`,
+			`\n.enhanced-pdf-reader-backlink-highlight-layer .enhanced-pdf-reader-backlink:not(.hovered-highlight) {`,
+			`    --enhanced-pdf-reader-color: ${defaultColor};`,
+			`    --enhanced-pdf-reader-backlink-icon-color: ${defaultColor};`,
+			`    --enhanced-pdf-reader-rect-color: ${defaultColor};`,
 			`}`,
 		].join("\n");
 
@@ -87,10 +87,10 @@ export class DomManager extends PDFReaderComponent {
 		if (!backlinkHoverColor || !isHexString(backlinkHoverColor))
 			backlinkHoverColor = DEFAULT_BACKLINK_HOVER_COLOR;
 		this.styleEl.textContent += [
-			`\n.pdf-reader-backlink-highlight-layer .pdf-reader-backlink.hovered-highlight {`,
-			`	--pdf-reader-color: ${backlinkHoverColor};`,
-			`	--pdf-reader-backlink-icon-color: ${backlinkHoverColor};`,
-			`   --pdf-reader-rect-color: ${backlinkHoverColor};`,
+			`\n.enhanced-pdf-reader-backlink-highlight-layer .enhanced-pdf-reader-backlink.hovered-highlight {`,
+			`	--enhanced-pdf-reader-color: ${backlinkHoverColor};`,
+			`	--enhanced-pdf-reader-backlink-icon-color: ${backlinkHoverColor};`,
+			`   --enhanced-pdf-reader-rect-color: ${backlinkHoverColor};`,
 			`}`,
 		].join("\n");
 
@@ -111,25 +111,25 @@ export class DomManager extends PDFReaderComponent {
 		].join("\n");
 
 		this.styleEl.textContent += [
-			`\n.workspace-leaf.pdf-reader-link-opened.is-highlighted::before {`,
+			`\n.workspace-leaf.enhanced-pdf-reader-link-opened.is-highlighted::before {`,
 			`	opacity: ${settings.existingTabHighlightOpacity};`,
 			`}`,
-			`\n.pdf-reader-backlink-highlight-layer {`,
+			`\n.enhanced-pdf-reader-backlink-highlight-layer {`,
 			`    position: absolute;`,
 			`    top: 0;`,
 			`    left: 0;`,
 			`    z-index: 10;`,
 			`    pointer-events: none;`,
 			`}`,
-			`\n.pdf-reader-backlink-highlight-layer .pdf-reader-backlink {`,
-			`    background-color: rgb(from var(--pdf-reader-color) r g b / var(--pdf-reader-highlight-opacity, 0.2));`,
+			`\n.enhanced-pdf-reader-backlink-highlight-layer .enhanced-pdf-reader-backlink {`,
+			`    background-color: rgb(from var(--enhanced-pdf-reader-color) r g b / var(--enhanced-pdf-reader-highlight-opacity, 0.2));`,
 			`}`,
-			`\n.pdf-reader-backlink-highlight-layer .pdf-reader-backlink.hovered-highlight {`,
-			`    background-color: var(--pdf-reader-color);`,
+			`\n.enhanced-pdf-reader-backlink-highlight-layer .enhanced-pdf-reader-backlink.hovered-highlight {`,
+			`    background-color: var(--enhanced-pdf-reader-color);`,
 			`    opacity: 1;`,
 			`}`,
-			`\n.pdf-reader-virtual-annotation {`,
-			`    background-color: var(--pdf-reader-color, rgba(255, 128, 0, 0.4));`,
+			`\n.enhanced-pdf-reader-virtual-annotation {`,
+			`    background-color: var(--enhanced-pdf-reader-color, rgba(255, 128, 0, 0.4));`,
 			`    opacity: 0.6;`,
 			`    pointer-events: none;`,
 			`    position: absolute;`,
@@ -147,20 +147,20 @@ export class DomManager extends PDFReaderComponent {
 		const calloutType = this.plugin.settings.calloutType.toLowerCase();
 
 		for (const colorName of Object.keys(this.plugin.settings.colors)) {
-			const varName = this.toCSSVariableName(colorName) ?? "--pdf-reader-default-color-rgb";
+			const varName = this.toCSSVariableName(colorName) ?? "--enhanced-pdf-reader-default-color-rgb";
 
 			this.styleEl.textContent += [
 				`\n.callout[data-callout="${calloutType}"][data-callout-metadata="${colorName.toLowerCase()}"] {`,
 				`	--callout-color: var(${varName});`,
-				`   background-color: rgba(var(--callout-color), var(--pdf-reader-highlight-opacity, 0.2))`,
+				`   background-color: rgba(var(--callout-color), var(--enhanced-pdf-reader-highlight-opacity, 0.2))`,
 				`}`,
 			].join("\n");
 		}
 
 		this.styleEl.textContent += [
 			`\n.callout[data-callout="${calloutType}"] {`,
-			`	--callout-color: var(--pdf-reader-default-color-rgb);`,
-			`   background-color: rgba(var(--callout-color), var(--pdf-reader-highlight-opacity, 0.2))`,
+			`	--callout-color: var(--enhanced-pdf-reader-default-color-rgb);`,
+			`   background-color: rgba(var(--callout-color), var(--enhanced-pdf-reader-highlight-opacity, 0.2))`,
 			`}`,
 		].join("\n");
 
@@ -216,7 +216,7 @@ export class DomManager extends PDFReaderComponent {
 			if (varName !== null) {
 				this.styleEl.textContent += [
 					`\nbody {`,
-					`    --pdf-reader-default-color-rgb: var(${varName})`,
+					`    --enhanced-pdf-reader-default-color-rgb: var(${varName})`,
 					`}`,
 				].join("\n");
 				defaultColorSet = true;
@@ -225,7 +225,7 @@ export class DomManager extends PDFReaderComponent {
 		if (!defaultColorSet) {
 			this.styleEl.textContent += [
 				`\nbody {`,
-				`    --pdf-reader-default-color-rgb: var(--text-highlight-bg-rgb)`,
+				`    --enhanced-pdf-reader-default-color-rgb: var(--text-highlight-bg-rgb)`,
 				`}`,
 			].join("\n");
 		}
@@ -235,7 +235,7 @@ export class DomManager extends PDFReaderComponent {
 		// 	defaultColor = 'rgb(var(--text-highlight-bg-rgb))';
 		// }
 		// this.styleEl.textContent += [
-		// 	`\n.pdf-reader-backlink-highlight-layer .pdf-reader-backlink:not(.hovered-highlight) {`,
+		// 	`\n.enhanced-pdf-reader-backlink-highlight-layer .enhanced-pdf-reader-backlink:not(.hovered-highlight) {`,
 		// 	`    background-color: ${defaultColor};`,
 		// 	`}`
 		// ].join('\n');
@@ -246,7 +246,7 @@ export class DomManager extends PDFReaderComponent {
 		let encoded = colorName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 		// strip leading and trailing '-'
 		encoded = encoded.replace(/^-+|-+$/g, "");
-		return encoded ? "--pdf-reader-" + encoded + "-rgb" : null;
+		return encoded ? "--enhanced-pdf-reader-" + encoded + "-rgb" : null;
 	}
 
 	getRgb(colorName?: string): RGB {
@@ -257,7 +257,7 @@ export class DomManager extends PDFReaderComponent {
 			if (rgb) return rgb;
 		}
 
-		let colorVarName = "--pdf-reader-default-color-rgb";
+		let colorVarName = "--enhanced-pdf-reader-default-color-rgb";
 		if (colorName) {
 			const specificColorVarName = this.toCSSVariableName(colorName);
 			if (specificColorVarName) {

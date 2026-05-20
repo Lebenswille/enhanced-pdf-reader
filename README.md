@@ -1,6 +1,6 @@
-# PDF Reader: Professional PDF Workspace for Obsidian
+# Enhanced PDF Reader: Professional PDF Workspace for Obsidian
 
-**PDF Reader** transforms Obsidian's built-in PDF viewer into a professional research workspace. It treats **PDF highlights as dynamic backlinks**, ensuring your knowledge remains as accessible as your standard Markdown notes.
+**Enhanced PDF Reader** transforms Obsidian's built-in PDF viewer into a professional research workspace. It treats **PDF highlights as dynamic backlinks**, ensuring your knowledge remains as accessible as your standard Markdown notes.
 
 ### Why this version?
 Obsidian's native viewer is great for reading, but limited for active research. This project bridges that gap by providing a **stable, native-first experience** that focuses on reducing the friction between reading and note-taking.
@@ -22,7 +22,7 @@ The core logic of this plugin provides several powerful features:
 ## Getting Started
 
 ### 1. Installation
-*   **Manual**: Download the `main.js`, `manifest.json`, and `styles.css` from the latest release and place them in `.obsidian/plugins/pdf-reader/`.
+*   **Manual**: Download the `main.js`, `manifest.json`, and `styles.css` from the latest release and place them in `.obsidian/plugins/enhanced-pdf-reader/`.
 
 ### 2. Basic Usage
 *   **Selection SelectionToolbar**: Select any text in a PDF to trigger the floating toolbar. Choose a color to instantly highlight and create a backlink.

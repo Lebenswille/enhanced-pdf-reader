@@ -492,11 +492,11 @@ export class WorkspaceLib extends PDFReaderLibSubmodule {
 		}
 
 		if (sameFileLeaf.isVisible() && this.settings.highlightExistingTab) {
-			sameFileLeaf.containerEl.addClass("pdf-reader-link-opened", "is-highlighted");
+			sameFileLeaf.containerEl.addClass("enhanced-pdf-reader-link-opened", "is-highlighted");
 			setTimeout(
 				() =>
 					sameFileLeaf.containerEl.removeClass(
-						"pdf-reader-link-opened",
+						"enhanced-pdf-reader-link-opened",
 						"is-highlighted",
 					),
 				this.settings.existingTabHighlightDuration * 1000,

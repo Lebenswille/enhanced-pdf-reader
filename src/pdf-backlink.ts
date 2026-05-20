@@ -63,7 +63,7 @@ export class BacklinkPanePDFManager extends PDFReaderComponent {
 									annot.data.rect,
 									pageView,
 								);
-								rectEl.addClass("pdf-reader-annotation-bounding-rect");
+								rectEl.addClass("enhanced-pdf-reader-annotation-bounding-rect");
 							}
 						});
 					}

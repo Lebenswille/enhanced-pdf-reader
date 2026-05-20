@@ -142,7 +142,7 @@ export class DataviewInlineFieldsModal extends PDFReaderModal {
 							a.onclick = () => {
 								this.plugin.openSettingTab().scrollTo("proxyMDProperty");
 							};
-							setTooltip(a, "Open in PDF Reader settings", { placement: "top" });
+							setTooltip(a, "Open in Enhanced PDF Reader settings", { placement: "top" });
 						},
 					),
 					" setting, ",

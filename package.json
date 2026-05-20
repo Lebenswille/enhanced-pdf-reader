@@ -1,5 +1,5 @@
 {
-    "name": "pdf-reader",
+    "name": "enhanced-pdf-reader",
     "version": "1.0.5",
     "description": "The most Obsidian-native PDF annotation tool ever.",
     "scripts": {

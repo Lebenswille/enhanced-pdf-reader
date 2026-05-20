@@ -9,7 +9,7 @@ export class PDFReaderSync extends PDFReaderLibSubmodule {
 	}
 
 	init() {
-		console.log("PDF Reader: PDFReaderSync initialized");
+		console.log("Enhanced PDF Reader: PDFReaderSync initialized");
 		this.registerHeaderButton();
 		this.registerSideBarIcon();
 		// Remove automatic note creation on PDF open
@@ -103,7 +103,7 @@ export class PDFReaderSync extends PDFReaderLibSubmodule {
 		const existing = this.app.vault.getAbstractFileByPath(fullPath);
 		if (!existing) {
 			const created = await this.app.vault.create(fullPath, content);
-			new Notice(`PDF Reader: Created associated note for "${pdfFile.name}"`);
+			new Notice(`Enhanced PDF Reader: Created associated note for "${pdfFile.name}"`);
 			return created;
 		}
 		return existing instanceof TFile ? existing : null;
@@ -152,7 +152,7 @@ export class PDFReaderSync extends PDFReaderLibSubmodule {
 		return null;
 	}
 
-	private static readonly HEADER_BTN_CLASS = "pdf-reader-open-source-btn";
+	private static readonly HEADER_BTN_CLASS = "enhanced-pdf-reader-open-source-btn";
 
 	private registerHeaderButton() {
 		this.app.workspace.onLayoutReady(() => {
@@ -180,10 +180,10 @@ export class PDFReaderSync extends PDFReaderLibSubmodule {
 				if (pdfFile) {
 					this.openPDF(pdfFile);
 				} else {
-					new Notice("PDF Reader: No source PDF found for the current note.");
+					new Notice("Enhanced PDF Reader: No source PDF found for the current note.");
 				}
 			} else {
-				new Notice("PDF Reader: Please open a note to view its source PDF.");
+				new Notice("Enhanced PDF Reader: Please open a note to view its source PDF.");
 			}
 		});
 	}
@@ -255,7 +255,7 @@ export class PDFReaderSync extends PDFReaderLibSubmodule {
 		if (pdfFile && noteFile) {
 			await this.syncFromPDFToNote(pdfFile, noteFile);
 		} else {
-			new Notice("PDF Reader: No associated PDF or note found for syncing.");
+			new Notice("Enhanced PDF Reader: No associated PDF or note found for syncing.");
 		}
 	}
 
@@ -300,7 +300,7 @@ export class PDFReaderSync extends PDFReaderLibSubmodule {
 	}
 
 	async syncFromPDFToNote(pdfFile: TFile, noteFile: TFile) {
-		new Notice(`PDF Reader: Syncing annotations from "${pdfFile.name}"...`);
+		new Notice(`Enhanced PDF Reader: Syncing annotations from "${pdfFile.name}"...`);
 		try {
 			const doc = await this.lib.loadPDFDocument(pdfFile);
 			const highlights = await this.lib.highlight.extract.getAnnotatedTextsInDocument(doc);
@@ -368,12 +368,12 @@ export class PDFReaderSync extends PDFReaderLibSubmodule {
 				const finalContent =
 					content + (content.endsWith("\n") ? "" : "\n") + newMarkdownContent;
 				await this.app.vault.modify(noteFile, finalContent);
-				new Notice(`PDF Reader: Synced ${addedCount} new annotations.`);
+				new Notice(`Enhanced PDF Reader: Synced ${addedCount} new annotations.`);
 			} else {
-				new Notice(`PDF Reader: No new annotations to sync.`);
+				new Notice(`Enhanced PDF Reader: No new annotations to sync.`);
 			}
 		} catch (error) {
-			console.error("PDF Reader Sync error:", error);
+			console.error("Enhanced PDF Reader Sync error:", error);
 		}
 	}
 }

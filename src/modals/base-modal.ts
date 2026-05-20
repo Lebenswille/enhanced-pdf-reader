@@ -13,7 +13,7 @@ export class PDFReaderModal extends Modal {
 		this.plugin = plugin;
 		this.lib = plugin.lib;
 		this.component = new Component();
-		this.contentEl.addClass("pdf-reader-modal");
+		this.contentEl.addClass("enhanced-pdf-reader-modal");
 	}
 
 	onOpen() {

@@ -679,7 +679,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 						});
 					}
 
-					// Added in PDF Reader 0.40.22
+					// Added in Enhanced PDF Reader 0.40.22
 					// In this version, I changed how `defaultZoomValue`, `scrollModeOnLoad` & `spreadModeOnLoad` options
 					// work as Obsidian 1.8.0 update broke the previous mechanism (reported in https://github.com/RyotaUshio/obsidian-pdf-reader/issues/333).
 					// The new implementation worked almost perfectly, but there was one problem.
@@ -1219,7 +1219,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 
 					const modifyAnnotationPopup = (popupMetaEl: HTMLElement) => {
 						popupMetaEl.createDiv(
-							"pdf-reader-annotation-icon-container",
+							"enhanced-pdf-reader-annotation-icon-container",
 							(iconContainerEl) => {
 								// replace the copy button with a custom one
 								const copyButtonEl = popupMetaEl?.querySelector<HTMLElement>(
@@ -1229,7 +1229,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 									copyButtonEl.remove(); // We need to remove the default event lisnter so we should use remove() instead of detach()
 
 									iconContainerEl.createDiv(
-										"clickable-icon pdf-reader-copy-annotation-link",
+										"clickable-icon enhanced-pdf-reader-copy-annotation-link",
 										(iconEl) => {
 											setIcon(iconEl, "lucide-copy");
 											setTooltip(iconEl, "Copy link");
@@ -1268,7 +1268,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 								) {
 									const subtype = annotationElement.data.subtype;
 									iconContainerEl.createDiv(
-										"clickable-icon pdf-reader-edit-annotation",
+										"clickable-icon enhanced-pdf-reader-edit-annotation",
 										(editButtonEl) => {
 											setIcon(editButtonEl, "lucide-pencil");
 											setTooltip(editButtonEl, "Edit");
@@ -1293,7 +1293,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 									plugin.settings.enableAnnotationDeletion
 								) {
 									iconContainerEl.createDiv(
-										"clickable-icon pdf-reader-delete-annotation",
+										"clickable-icon enhanced-pdf-reader-delete-annotation",
 										(deleteButtonEl) => {
 											setIcon(deleteButtonEl, "lucide-trash");
 											setTooltip(deleteButtonEl, "Delete");
@@ -1366,7 +1366,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 						const el = this.activeAnnotationPopupEl;
 						const file = this.file;
 						registerAnnotationPopupDrag(plugin, el, this, file, page, id);
-						el.addClass("pdf-reader-draggable");
+						el.addClass("enhanced-pdf-reader-draggable");
 					}
 
 					return ret;
@@ -1396,7 +1396,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 						case "text":
 							onCopy(evt);
 							return;
-						case "pdf-reader":
+						case "enhanced-pdf-reader":
 							setTimeout(() => lib.commands.copyLink(false));
 							return;
 						case "obsidian":
@@ -1444,7 +1444,7 @@ const patchPDFViewerChild = (plugin: PDFReader, child: PDFViewerChild) => {
 									}
 								}
 							} else if (divs && divs[index]) {
-								// This block is introduced by PDF Reader.
+								// This block is introduced by Enhanced PDF Reader.
 								// If the text is not split into chars, we need to manually measure
 								// the bounding box of each character.
 								for (const {

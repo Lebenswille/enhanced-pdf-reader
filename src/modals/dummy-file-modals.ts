@@ -41,7 +41,7 @@ export class DummyFileModal extends PDFReaderModal {
 					);
 					el.createEl("a", {
 						text: "Learn more about dummy PDF files",
-						href: "https://github.com/Lebenswille/pdf-reader-for-obsidian#readme",
+						href: "https://github.com/Lebenswille/enhanced-pdf-reader-for-obsidian#readme",
 					});
 				}),
 			);
@@ -116,7 +116,7 @@ export class DummyFileModal extends PDFReaderModal {
 					el.appendText("You can specify the default folder in the ");
 					el.createEl("a", {
 						text: "settings",
-						href: "obsidian://pdf-reader?setting=dummyFileFolderPath",
+						href: "obsidian://enhanced-pdf-reader?setting=dummyFileFolderPath",
 					});
 					el.appendText(".");
 				}),

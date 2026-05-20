@@ -31,7 +31,7 @@ export const patchClipboardManager = (plugin: PDFReader) => {
 			handleDragOver(old) {
 				return function (this: ClipboardManager, evt: DragEvent): void {
 					const draggable = app.dragManager.draggable;
-					if (!draggable || draggable.source !== "pdf-reader") {
+					if (!draggable || draggable.source !== "enhanced-pdf-reader") {
 						return old.call(this, evt);
 					}
 
@@ -47,7 +47,7 @@ export const patchClipboardManager = (plugin: PDFReader) => {
 				return function (this: ClipboardManager, evt: DragEvent): boolean | undefined {
 					const draggable = app.dragManager.draggable;
 
-					if (!draggable || draggable.source !== "pdf-reader") {
+					if (!draggable || draggable.source !== "enhanced-pdf-reader") {
 						return old.call(this, evt);
 					}
 

@@ -414,7 +414,7 @@ export function getStyleSettings(app: App) {
 		.settings;
 	const pdfReaderStyleSettings = fullStyleSettings
 		? Object.fromEntries(
-				Object.entries(fullStyleSettings as any).filter(([key]) => key.startsWith("pdf-reader@@")),
+				Object.entries(fullStyleSettings as any).filter(([key]) => key.startsWith("enhanced-pdf-reader@@")),
 			)
 		: null;
 	return pdfReaderStyleSettings;

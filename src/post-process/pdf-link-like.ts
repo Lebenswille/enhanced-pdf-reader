@@ -41,7 +41,7 @@ abstract class PDFLinkLikePostProcessor implements HoverParent {
 	set hoverPopover(hoverPopover) {
 		this.child.hoverPopover = hoverPopover;
 		if (hoverPopover) {
-			hoverPopover.hoverEl.addClass("pdf-reader-pdf-link-like-popover");
+			hoverPopover.hoverEl.addClass("enhanced-pdf-reader-pdf-link-like-popover");
 			this.onHoverPopoverSet(hoverPopover);
 		}
 	}
@@ -205,7 +205,7 @@ abstract class PDFDestinationHolderPostProcessor extends PDFLinkLikePostProcesso
 export class PDFInternalLinkPostProcessor extends PDFDestinationHolderPostProcessor {
 	linkAnnotationElement: AnnotationElement;
 
-	static readonly HOVER_LINK_SOURCE_ID = "pdf-reader-internal-link";
+	static readonly HOVER_LINK_SOURCE_ID = "enhanced-pdf-reader-internal-link";
 
 	protected constructor(
 		plugin: PDFReader,
@@ -274,7 +274,7 @@ export class PDFInternalLinkPostProcessor extends PDFDestinationHolderPostProces
 
 	async customHover(evt: MouseEvent) {
 		if (
-			this.plugin.settings.actionOnCitationHover === "pdf-reader-bib-popover" &&
+			this.plugin.settings.actionOnCitationHover === "enhanced-pdf-reader-bib-popover" &&
 			this.child.bib &&
 			this.child.bib.isEnabled()
 		) {
@@ -290,14 +290,14 @@ export class PDFInternalLinkPostProcessor extends PDFDestinationHolderPostProces
 
 	onHoverPopoverSet(hoverPopover: HoverPopover): void {
 		super.onHoverPopoverSet(hoverPopover);
-		hoverPopover.hoverEl.addClass("pdf-reader-pdf-internal-link-popover");
+		hoverPopover.hoverEl.addClass("enhanced-pdf-reader-pdf-internal-link-popover");
 	}
 }
 
 export class PDFOutlineItemPostProcessor extends PDFDestinationHolderPostProcessor {
 	item: PDFOutlineTreeNode;
 
-	static readonly HOVER_LINK_SOURCE_ID = "pdf-reader-outline";
+	static readonly HOVER_LINK_SOURCE_ID = "enhanced-pdf-reader-outline";
 
 	protected constructor(plugin: PDFReader, child: PDFViewerChild, item: PDFOutlineTreeNode) {
 		super(plugin, child, item.selfEl);
@@ -326,12 +326,12 @@ export class PDFOutlineItemPostProcessor extends PDFDestinationHolderPostProcess
 
 	onHoverPopoverSet(hoverPopover: HoverPopover): void {
 		super.onHoverPopoverSet(hoverPopover);
-		hoverPopover.hoverEl.addClass("pdf-reader-outline-item-popover");
+		hoverPopover.hoverEl.addClass("enhanced-pdf-reader-outline-item-popover");
 	}
 }
 
 export class PDFThumbnailItemPostProcessor extends PDFLinkLikePostProcessor {
-	static readonly HOVER_LINK_SOURCE_ID = "pdf-reader-thumbnail";
+	static readonly HOVER_LINK_SOURCE_ID = "enhanced-pdf-reader-thumbnail";
 
 	static registerEvents(plugin: PDFReader, child: PDFViewerChild) {
 		return new PDFThumbnailItemPostProcessor(
@@ -364,6 +364,6 @@ export class PDFThumbnailItemPostProcessor extends PDFLinkLikePostProcessor {
 
 	onHoverPopoverSet(hoverPopover: HoverPopover): void {
 		super.onHoverPopoverSet(hoverPopover);
-		hoverPopover.hoverEl.addClass("pdf-reader-thumbnail-item-popover");
+		hoverPopover.hoverEl.addClass("enhanced-pdf-reader-thumbnail-item-popover");
 	}
 }

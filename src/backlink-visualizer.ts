@@ -76,7 +76,7 @@ export class BacklinkDomManager extends PDFReaderComponent {
 		const cacheToDoms = this.getCacheToDomsMap(pageNumber);
 		for (const el of cacheToDoms.values()) {
 			// Avoid removing elements in the annotation layer
-			if (el.closest(".pdf-reader-backlink-highlight-layer")) el.remove();
+			if (el.closest(".enhanced-pdf-reader-backlink-highlight-layer")) el.remove();
 		}
 		this.pagewiseOnClearDomCallbacksMap.get(pageNumber).forEach((cb) => cb());
 		this.pagewiseCacheToDomsMap.delete(pageNumber);
@@ -151,7 +151,7 @@ export class BacklinkDomManager extends PDFReaderComponent {
 		this.registerDomEventForCache(cache, el, "mouseover", (event) => {
 			this.app.workspace.trigger("hover-link", {
 				event,
-				source: "pdf-reader",
+				source: "enhanced-pdf-reader",
 				hoverParent: this.visualizer,
 				targetEl: el,
 				linktext: cache.sourcePath,
@@ -234,9 +234,9 @@ export class BacklinkDomManager extends PDFReaderComponent {
 		} else if (color?.type === "rgb") {
 			const { r, g, b } = color.rgb;
 			el.setCssProps({
-				"--pdf-reader-color": `rgb(${r}, ${g}, ${b})`,
-				"--pdf-reader-backlink-icon-color": `rgb(${r}, ${g}, ${b})`,
-				"--pdf-reader-rect-color": `rgb(${r}, ${g}, ${b})`,
+				"--enhanced-pdf-reader-color": `rgb(${r}, ${g}, ${b})`,
+				"--enhanced-pdf-reader-backlink-icon-color": `rgb(${r}, ${g}, ${b})`,
+				"--enhanced-pdf-reader-rect-color": `rgb(${r}, ${g}, ${b})`,
 			});
 		}
 	}
@@ -367,7 +367,7 @@ export class PDFViewerBacklinkVisualizer extends PDFBacklinkVisualizer implement
 	set hoverPopover(hoverPopover: HoverPopover | null) {
 		// We can add some post-processing if needed
 		this.child.hoverPopover = hoverPopover;
-		hoverPopover?.hoverEl.addClass("pdf-reader-backlink-popover");
+		hoverPopover?.hoverEl.addClass("enhanced-pdf-reader-backlink-popover");
 	}
 
 	onload() {
@@ -471,7 +471,7 @@ export class PDFViewerBacklinkVisualizer extends PDFBacklinkVisualizer implement
 
 		for (const { rect, indices } of rects) {
 			const rectEl = this.lib.highlight.viewer.placeRectInPage(rect, pageView);
-			rectEl.addClasses(["pdf-reader-backlink", "pdf-reader-backlink-selection"]);
+			rectEl.addClasses(["enhanced-pdf-reader-backlink", "enhanced-pdf-reader-backlink-selection"]);
 
 			// font-size is used to set the padding of this highlight in em unit
 			const textDiv = textDivs[indices[0]];
@@ -505,7 +505,7 @@ export class PDFViewerBacklinkVisualizer extends PDFBacklinkVisualizer implement
 		if (!annotationLayer) return;
 		const annot = annotationLayer.getAnnotation(id);
 		if (!annot) return;
-		annot.container.addClasses(["pdf-reader-backlink", "pdf-reader-backlink-annotation"]);
+		annot.container.addClasses(["enhanced-pdf-reader-backlink", "enhanced-pdf-reader-backlink-annotation"]);
 
 		const [, , right, top] = annot.data.rect;
 		let iconEl: HTMLElement | undefined;
@@ -516,7 +516,7 @@ export class PDFViewerBacklinkVisualizer extends PDFBacklinkVisualizer implement
 		let rectEl: HTMLElement | undefined;
 		if (this.settings.showBoundingRectForBacklinkedAnnot) {
 			rectEl = this.lib.highlight.viewer.placeRectInPage(annot.data.rect, pageView);
-			rectEl.addClass("pdf-reader-annotation-bounding-rect");
+			rectEl.addClass("enhanced-pdf-reader-annotation-bounding-rect");
 		}
 
 		const cacheToDoms = this.domManager.getCacheToDomsMap(pageNumber);
@@ -575,7 +575,7 @@ export class PDFViewerBacklinkVisualizer extends PDFBacklinkVisualizer implement
 			[left, bottom, right, top],
 			pageView,
 		);
-		rectEl.addClasses(["pdf-reader-backlink", "pdf-reader-backlink-fit-r"]);
+		rectEl.addClasses(["enhanced-pdf-reader-backlink", "enhanced-pdf-reader-backlink-fit-r"]);
 
 		const cacheToDoms = this.domManager.getCacheToDomsMap(pageNumber);
 		for (const cache of caches) {
@@ -605,10 +605,10 @@ export class PDFViewerBacklinkVisualizer extends PDFBacklinkVisualizer implement
 				? rectLeft
 				: rectRight;
 		const iconEl = this.lib.highlight.viewer.placeRectInPage(rect, pageView);
-		iconEl.addClass("pdf-reader-backlink-icon");
+		iconEl.addClass("enhanced-pdf-reader-backlink-icon");
 		setIcon(iconEl, "links-coming-in");
 		const svg = iconEl.querySelector<SVGElement>("svg");
-		svg?.setAttribute("stroke", "var(--pdf-reader-backlink-icon-color)");
+		svg?.setAttribute("stroke", "var(--enhanced-pdf-reader-backlink-icon-color)");
 		return iconEl;
 	}
 }

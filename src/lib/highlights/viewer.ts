@@ -7,9 +7,9 @@ import { PDFPageView, PDFViewerChild, Rect } from "typings";
 export class ViewerHighlightLib extends PDFReaderLibSubmodule {
 	getPDFReaderBacklinkHighlightLayer(pageView: PDFPageView): HTMLElement {
 		const pageDiv = pageView.div;
-		let layerEl = pageDiv.querySelector<HTMLElement>("div.pdf-reader-backlink-highlight-layer");
+		let layerEl = pageDiv.querySelector<HTMLElement>("div.enhanced-pdf-reader-backlink-highlight-layer");
 		if (!layerEl) {
-			layerEl = pageDiv.createDiv("pdf-reader-backlink-highlight-layer");
+			layerEl = pageDiv.createDiv("enhanced-pdf-reader-backlink-highlight-layer");
 		}
 		// Always update dimensions to match current zoom/viewport
 		window.pdfjsLib.setLayerDimensions(layerEl as HTMLDivElement, pageView.viewport);
@@ -22,7 +22,7 @@ export class ViewerHighlightLib extends PDFReaderLibSubmodule {
 		const [x1, y1, x2, y2] = viewport.convertToViewportRectangle(rect);
 
 		const layerEl = this.getPDFReaderBacklinkHighlightLayer(page);
-		const rectEl = layerEl.createDiv("pdf-reader-backlink");
+		const rectEl = layerEl.createDiv("enhanced-pdf-reader-backlink");
 
 		// Since we used setLayerDimensions on layerEl with the same viewport,
 		// we can set the coordinates directly in pixels relative to the layer.

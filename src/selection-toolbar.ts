@@ -5,7 +5,7 @@ import { getEventCoords, isTargetHTMLElement } from "utils";
 import { ColorPalette } from "color-palette";
 
 export class SelectionToolbar extends Component {
-	static readonly CLS = "pdf-reader-selection-toolbar";
+	static readonly CLS = "enhanced-pdf-reader-selection-toolbar";
 	toolbarEl: HTMLElement;
 	child: PDFViewerChild;
 	plugin: PDFReader;

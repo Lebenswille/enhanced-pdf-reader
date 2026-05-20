@@ -210,7 +210,7 @@ interface PDFViewerChild {
 	//////////////////////////
 	component?: Component;
 	hoverPopover: HoverPopover | null;
-	/** The color palette (and other PDF Reader-related UI elements) mounted on this PDF viewer. */
+	/** The color palette (and other Enhanced PDF Reader-related UI elements) mounted on this PDF viewer. */
 	palette: ColorPalette | null;
 	/**
 	 * true if the file is located outside the vault; see the comment in the

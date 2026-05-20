@@ -8,7 +8,7 @@ export class PDFExternalLinkPostProcessor extends PDFReaderComponent implements 
 	child: PDFViewerChild;
 	annot: AnnotationElement;
 
-	static HOVER_LINK_SOURCE_ID = "pdf-reader-external-link";
+	static HOVER_LINK_SOURCE_ID = "enhanced-pdf-reader-external-link";
 
 	constructor(plugin: PDFReader, child: PDFViewerChild, annot: AnnotationElement) {
 		super(plugin);

@@ -16,7 +16,7 @@ const VimHintTargetSelectors = {
 	[VimHintTarget.Link]: ".annotationLayer > section.linkAnnotation:has(> a)",
 	[VimHintTarget.NonLinkAnnot]: ".annotationLayer > section:not(.linkAnnotation)",
 	[VimHintTarget.BacklinkHighlight]:
-		".pdf-reader-backlink-highlight-layer > .pdf-reader-backlink",
+		".enhanced-pdf-reader-backlink-highlight-layer > .enhanced-pdf-reader-backlink",
 };
 
 /** Inspired by Tridactyl's hint mode. */
@@ -71,7 +71,7 @@ export class VimHintMode extends VimBindingsMode {
 
 		const keymaps: Record<string, VimCommand> = {};
 
-		const cls = "pdf-reader-vim-hint-mode";
+		const cls = "enhanced-pdf-reader-vim-hint-mode";
 		const dataAttrName = "pdfReaderVimHint";
 
 		pageDiv.addClass(cls);

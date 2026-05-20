@@ -149,7 +149,7 @@ export class PDFReaderCommands extends PDFReaderLibSubmodule {
 			}
 			text += `- ${key}: ${value}\n`;
 		}
-		text += "\n#### PDF Reader debug info\n\n";
+		text += "\n#### Enhanced PDF Reader debug info\n\n";
 		text += "```\n" + JSON.stringify({ settings, styleSettings, styleSheet }) + "\n```\n";
 
 		await navigator.clipboard.writeText(text);

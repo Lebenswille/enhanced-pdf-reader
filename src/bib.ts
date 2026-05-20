@@ -35,7 +35,7 @@ export type AnystyleJson = Partial<{
 }>;
 
 export class BibliographyManager extends PDFReaderComponent {
-	static readonly HOVER_LINK_SOURCE_ID = "pdf-reader-citation-link";
+	static readonly HOVER_LINK_SOURCE_ID = "enhanced-pdf-reader-citation-link";
 
 	child: PDFViewerChild;
 	destIdToBibText: Map<string, string>;
@@ -106,7 +106,7 @@ export class BibliographyManager extends PDFReaderComponent {
 	) {
 		const spawnBibPopover = () => {
 			const hoverPopover = new HoverPopover(hoverParent, targetEl, 200);
-			hoverPopover.hoverEl.addClass("pdf-reader-bib-popover");
+			hoverPopover.hoverEl.addClass("enhanced-pdf-reader-bib-popover");
 			const bibContainerEl = hoverPopover.hoverEl.createDiv();
 			hoverPopover.addChild(new BibliographyDom(this, destId, bibContainerEl));
 		};
@@ -361,7 +361,7 @@ export class BibliographyDom extends PDFReaderComponent {
 		this.bib = bib;
 		this.destId = destId;
 		this.containerEl = containerEl;
-		this.containerEl.addClass("pdf-reader-bib");
+		this.containerEl.addClass("enhanced-pdf-reader-bib");
 	}
 
 	get child() {

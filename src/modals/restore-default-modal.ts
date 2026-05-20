@@ -5,10 +5,10 @@ import { PDFReaderModal } from "./base-modal";
 export class RestoreDefaultModal extends PDFReaderModal {
 	onOpen(): void {
 		super.onOpen();
-		this.containerEl.addClass("pdf-reader-restore-default-modal");
+		this.containerEl.addClass("enhanced-pdf-reader-restore-default-modal");
 		this.titleEl.setText(`${this.plugin.manifest.name}: Restore default settings`);
 		this.contentEl.createEl("p", {
-			text: `This operation will overwrite your PDF Reader config file (${
+			text: `This operation will overwrite your Enhanced PDF Reader config file (${
 				(this.plugin.manifest.dir ??
 					this.app.vault.configDir + "/plugins/" + this.plugin.manifest.id) + "/data.json"
 			}). You may want to back up the file before proceeding.`,
